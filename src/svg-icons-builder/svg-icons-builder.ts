@@ -3,6 +3,7 @@ import { JsonObject } from "@angular-devkit/core";
 import { fork } from "child_process";
 import { join } from "path";
 import { ConstantsConversionOptions } from "svg-to-ts/src/lib/options/conversion-options";
+import { MessageData } from './svg-to-ts-wrapper';
 
 interface Options extends ConstantsConversionOptions, JsonObject {
   generateCompleteIconSet: boolean; // TODO: should this be exportCompleteIconSet
@@ -15,7 +16,7 @@ export default createBuilder<Options>((options, context) => {
       stdio: [0, 1, 2, "ipc"],
     });
     child.send(options);
-    child.on("message", ({ isError, data }) => {
+    child.on("message", ({ isError, data }: MessageData) => {
       if (isError) {
         context.logger.error(data);
         child.kill("SIGINT");

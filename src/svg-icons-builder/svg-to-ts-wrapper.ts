@@ -1,17 +1,21 @@
-#!/usr/bin/env node
 import {
   ConversionType,
   FileConversionOptions,
   ObjectConversionOptions,
   ConstantsConversionOptions,
-} from "svg-to-ts/src/lib/options/conversion-options";
-import { error, info, success } from "svg-to-ts/src/lib/helpers/log-helper";
-import { convertToSingleObject } from "svg-to-ts/src/lib/converters/object.converter";
-import { convertToConstants } from "svg-to-ts/src/lib/converters/constants.converter";
-import { convertToFiles } from "svg-to-ts/src/lib/converters/files.converter";
+} from "svg-to-ts/options/conversion-options";
+import { error, info, success } from "svg-to-ts/helpers/log-helper";
+import { convertToSingleObject } from "svg-to-ts/converters/object.converter";
+import { convertToConstants } from "svg-to-ts/converters/constants.converter";
+import { convertToFiles } from "svg-to-ts/converters/files.converter";
+
+export type MessageData {
+  isError: boolean;
+  data: string
+}
 
 const sendParentProcessMessage = (msgData: { level: string; data: string }) => {
-  const isError = msgData.level === "ERROR";
+  const isError = msgData.level === "ERROR";  
   switch (msgData.level) {
     case "ERROR":
       error(msgData.data);
@@ -24,11 +28,11 @@ const sendParentProcessMessage = (msgData: { level: string; data: string }) => {
   }
 
   if (process.send) {
-    process.send({ isError, data: msgData.data });
+    process.send({ isError, data: msgData.data } as MessageData);
   }
 };
 
-const svgToTsWrapper = async (
+export const svgToTsWrapper = async (
   conversionOptions:
     | FileConversionOptions
     | ConstantsConversionOptions
@@ -74,3 +78,5 @@ process.on("message", async (conversionOptions) => {
     process.exit(1);
   }
 });
+
+export default {}

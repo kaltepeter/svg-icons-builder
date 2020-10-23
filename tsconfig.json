@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": "tsconfig",
+    "baseUrl": ".",
     "lib": [
       "es2018",
       "dom"
     ],
     "declaration": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -14,8 +14,9 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "importHelpers": true,
     "outDir": "dist",
-    "rootDir": "src/",
+    "rootDir": "src",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -24,12 +25,23 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@angular-extensions/svg-icons-builder/*": [
+        "/*"
+      ],
+      "svg-to-ts/*": ["node_modules/svg-to-ts/src/lib/*"]
+    }
   },
   "include": [
-    "src/**/*"
+    "**/*"
   ],
   "exclude": [
-    "src/*/files/**/*"
+    "*/files/**/*",
+    "node_modules",
+    "**/*.spec.ts",
   ]
 }

@@ -1,9 +1,9 @@
 import { Architect } from "@angular-devkit/architect";
 import { TestingArchitectHost } from "@angular-devkit/architect/testing";
 import { logging, schema } from "@angular-devkit/core";
+import { join } from "path";
 import { Delimiter } from "svg-to-ts/src/lib/generators/code-snippet-generators";
 import { CommonConversionOptions } from "svg-to-ts/src/lib/options/conversion-options";
-const { join } = require("path");
 
 describe("svg-icons-builder", () => {
   let architect: Architect;
@@ -21,7 +21,7 @@ describe("svg-icons-builder", () => {
     delimiter: Delimiter.CAMEL
   }
 
-  beforeEach(async () => {
+  beforeEach(async() => {
     const registry = new schema.CoreSchemaRegistry();
     registry.addPostTransform(schema.transforms.addUndefinedDefaults);
     const workspaceRoot = join(__dirname, "..", "..");
