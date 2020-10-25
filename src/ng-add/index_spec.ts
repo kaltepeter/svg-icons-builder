@@ -1,13 +1,20 @@
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import * as path from 'path';
+import { join } from 'path';
 
-const collectionPath = path.join(__dirname, '../collection.json');
+const collectionPath = join(__dirname, '../collection.json');
+const runner = new SchematicTestRunner('schematics', collectionPath);
 
 describe('ng-add', () => {
+  let tree;
+
+  beforeEach(() => {
+    
+  });
+  
   it('works', async () => {
-    const runner = new SchematicTestRunner('schematics', collectionPath);
-    const tree = await runner.runSchematicAsync('ng-add', {}, Tree.empty()).toPromise();
+    tree = await runner.runSchematicAsync('ng-add', {}, Tree.empty()).toPromise();
+    // const packageJson = readJsonInTree(result, 'package.json');
 
     expect(tree.files).toEqual([]);
   });

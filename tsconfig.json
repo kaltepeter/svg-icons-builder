@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "tsconfig",
+    "baseUrl": ".",
     "lib": [
       "es2018",
       "dom"
@@ -15,21 +15,22 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "outDir": "dist",
-    "rootDir": "src/",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es6",
     "types": [
-      "jasmine",
       "node"
     ]
   },
   "include": [
-    "src/**/*"
+    "**/*.ts"
   ],
   "exclude": [
-    "src/*/files/**/*"
+    "*/files/**/*",
+    "dist",
+    "node_modules",
+    "**/*_spec.ts"
   ]
 }

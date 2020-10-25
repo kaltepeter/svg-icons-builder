@@ -1,0 +1,23 @@
+{
+ "extends": "./tsconfig.json",
+ "compilerOptions": {
+    "types": [
+        "jasmine",
+        "node"
+      ],
+    "paths": {
+        "@angular-extensions/svg-icons-builder": ["src"],
+        "@angular-extensions/svg-icons-builder/*": ["src/*"]
+      }
+ },
+ "include": [
+    "**/*.ts",
+    "**/*_spec.ts"
+  ],
+  "exclude": [
+    "*/files/**/*",
+    "dist",
+    "node_modules",
+  ]   
+}
+  
